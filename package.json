@@ -1,5 +1,15 @@
 {
     "name": "ideanick",
-    "private":"true",
-    "version": "0.0.0"
+    "private": "true",
+    "version": "0.0.0",
+    "scripts": {
+        "b": "pnpm --filter @ideanick/backend",
+        "w": "pnpm --filter @ideanick/webapp",
+        "dev": "pnpm -r --parallel dev",
+        "types": "concurrently 'pnpm b types' 'pnpm w types'",
+        "prettify": "pnpm -r --parallel prettify"
+    },
+    "devDependencies": {
+        "concurrently": "^9.1.2"
+    }
 }
