@@ -3,6 +3,8 @@ import { ViewIdeaRouteParams } from '../../lib/routes';
 import { trpc } from '../../lib/trpc';
 import DOMPurify from 'dompurify';
 
+import css from './index.module.scss';
+
 export const ViewIdeaPage = () => {
   const { ideaNick } = useParams() as ViewIdeaRouteParams;
 
@@ -24,9 +26,9 @@ export const ViewIdeaPage = () => {
 
   return (
     <div>
-      <h1>Idea {data.idea.name}</h1>
-      <p>{data.idea.description}</p>
-      <div dangerouslySetInnerHTML={{ __html: cleanHTML }} />
+      <h1 className={css.title}>{data.idea.name}</h1>
+      <p className={css.description}>{data.idea.description}</p>
+      <div className={css.text} dangerouslySetInnerHTML={{ __html: cleanHTML }} />
     </div>
   );
 };
