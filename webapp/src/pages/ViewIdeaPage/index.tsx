@@ -1,18 +1,32 @@
 import { useParams } from 'react-router-dom';
 import { ViewIdeaRouteParams } from '../../lib/routes';
+import { trpc } from '../../lib/trpc';
+import DOMPurify from 'dompurify';
 
 export const ViewIdeaPage = () => {
   const { ideaNick } = useParams() as ViewIdeaRouteParams;
 
+  const { data, error, isLoading, isFetching, isError } = trpc.getIdea.useQuery({ ideaNick });
+
+  if (isLoading || isFetching) {
+    return <span>Loading...</span>;
+  }
+
+  if (isError) {
+    return <span>Error: {error.message}</span>;
+  }
+
+  if (!data.idea) {
+    return <span>Idea not found</span>;
+  }
+
+  const cleanHTML = DOMPurify.sanitize(data.idea.text);
+
   return (
     <div>
-      <h1>Idea {ideaNick}</h1>
-      <p>Description of idea 1 ...</p>
-      <div>
-        <p>Text paragraph 1 of idea 1 ...</p>
-        <p>Text paragraph 2 of idea 1 ...</p>
-        <p>Text paragraph 3 of idea 1 ...</p>
-      </div>
+      <h1>Idea {data.idea.name}</h1>
+      <p>{data.idea.description}</p>
+      <div dangerouslySetInnerHTML={{ __html: cleanHTML }} />
     </div>
   );
 };
