@@ -3,6 +3,7 @@ import { trpc } from '../../lib/trpc';
 import { Link } from 'react-router-dom';
 
 import css from './index.module.scss';
+import { Segment } from '../../components/Segment';
 
 export const AllIdeasPage = () => {
   const { data, error, isLoading, isFetching, isError } = trpc.getIdeas.useQuery();
@@ -15,25 +16,25 @@ export const AllIdeasPage = () => {
     return <span>Error: {error.message}</span>;
   }
 
-  console.log(css.idea);
-
   return (
-    <div>
-      <h1 className={css.title}>All Ideas</h1>
+    <Segment title="All Ideas">
       <div className={css.ideas}>
         {data.ideas.map((idea) => {
           return (
             <div className={css.idea} key={idea.nick}>
-              <h2 className={css.ideaName}>
-                <Link className={css.ideaLink} to={getViewIdeaRoute({ ideaNick: idea.nick })}>
-                  {idea.name}
-                </Link>
-              </h2>
-              <p className={css.ideaDescription}>{idea.description}</p>
+              <Segment
+                title={
+                  <Link className={css.ideaLink} to={getViewIdeaRoute({ ideaNick: idea.nick })}>
+                    {idea.name}
+                  </Link>
+                }
+                size={2}
+                description={idea.description}
+              />
             </div>
           );
         })}
       </div>
-    </div>
+    </Segment>
   );
 };
