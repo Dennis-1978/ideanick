@@ -8,6 +8,8 @@ interface InputProps<T> {
 
 export function TextArea<T>({ name, label, formik }: InputProps<T>) {
   const value = formik.values[name];
+  const error = formik.errors[name] as string | undefined;
+
   return (
     <div style={{ marginBottom: 10 }}>
       <label htmlFor={String(name)}>{label}</label>
@@ -20,6 +22,7 @@ export function TextArea<T>({ name, label, formik }: InputProps<T>) {
         name={String(name)}
         id={String(name)}
       />
+      {error && <div style={{ color: 'red' }}>{error}</div>}
     </div>
   );
 }
