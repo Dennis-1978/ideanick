@@ -99,6 +99,9 @@ importers:
       formik:
         specifier: 2.4.4
         version: 2.4.4(react@19.0.0)
+      formik-validator-zod:
+        specifier: 1.0.2
+        version: 1.0.2(formik@2.4.4(react@19.0.0))(zod@3.22.2)
       include-media:
         specifier: ^2.0.0
         version: 2.0.0
@@ -117,6 +120,9 @@ importers:
       sass:
         specifier: ^1.85.1
         version: 1.85.1
+      zod:
+        specifier: 3.22.2
+        version: 3.22.2
     devDependencies:
       '@eslint/js':
         specifier: 8.57.0
@@ -2333,6 +2339,12 @@ packages:
     resolution: {integrity: sha512-Ld2g8rrAyMYFXBhEqMz8ZAHBi4J4uS1i/CxGMDnjyFWddMXLVcDp051DZfu+t7+ab7Wv6SMqpWmyFIj5UbfFvg==}
     engines: {node: '>=14'}
 
+  formik-validator-zod@1.0.2:
+    resolution: {integrity: sha512-1348tUpeHUCHf6HcNT/XLf2odSddbPgbUR1WAPFUM8vbXA+d6cj6sC1oV7aoo0dr9oFQm46gbz7pSdQiydFEuQ==}
+    peerDependencies:
+      formik: ^2.2.9
+      zod: ^3.19.1
+
   formik@2.4.4:
     resolution: {integrity: sha512-MV99upag7fCC3JfsI60WcxhymwNZnJUcMcnGuoz6mDf78SUfBbKjmfcA9LzHx4lEmjzmOflhP7oqz+ZQv5eStg==}
     peerDependencies:
@@ -3819,6 +3831,9 @@ packages:
   yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+
+  zod@3.22.2:
+    resolution: {integrity: sha512-wvWkphh5WQsJbVk1tbx1l1Ly4yg+XecD+Mq280uBGt9wa5BKSWf4Mhp6GmrkPixhMxmabYY7RbzlwVP32pbGCg==}
 
   zod@3.24.2:
     resolution: {integrity: sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ==}
@@ -6405,6 +6420,11 @@ snapshots:
       cross-spawn: 7.0.6
       signal-exit: 4.1.0
 
+  formik-validator-zod@1.0.2(formik@2.4.4(react@19.0.0))(zod@3.22.2):
+    dependencies:
+      formik: 2.4.4(react@19.0.0)
+      zod: 3.22.2
+
   formik@2.4.4(react@19.0.0):
     dependencies:
       deepmerge: 2.2.1
@@ -7930,5 +7950,7 @@ snapshots:
   yn@3.1.1: {}
 
   yocto-queue@0.1.0: {}
+
+  zod@3.22.2: {}
 
   zod@3.24.2: {}

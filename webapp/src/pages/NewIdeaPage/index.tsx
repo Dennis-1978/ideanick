@@ -2,6 +2,8 @@ import { Segment } from '../../components/Segment';
 import { Input } from '../../components/Input';
 import { TextArea } from '../../components/TextAria';
 import { useFormik } from 'formik';
+import { withZodSchema } from 'formik-validator-zod';
+import { z } from 'zod';
 
 export const NewIdeaPage = () => {
   const formik = useFormik({
@@ -11,33 +13,21 @@ export const NewIdeaPage = () => {
       description: '',
       text: '',
     },
-    validate: (values) => {
-      const errors: Partial<typeof values> = {};
-      if (!values.name) {
-        errors.name = 'Name is required';
-      }
-      if (!values.nick) {
-        errors.nick = 'Name is required';
-      } else if (!values.nick.match(/^[a-z0-9-]+$/)) {
-        errors.nick = 'Nick may contain only lowercase letter, numbers and dashes';
-      }
-      if (!values.description) {
-        errors.description = 'Description is required';
-      }
-      if (!values.text) {
-        errors.text = 'Text is required';
-      } else if (values.text.length < 10) {
-        errors.text = 'Text should be at least 100 characters long';
-      }
-
-      return errors;
-    },
+    validate: withZodSchema(
+      z.object({
+        name: z.string().min(1, 'Name is required'),
+        nick: z
+          .string()
+          .min(1)
+          .regex(/^[a-z0-9-]+$/, 'Nick may contain only lowercase letter, numbers and dashes'),
+        description: z.string().min(1, 'Description is required'),
+        text: z.string().min(100, 'Text should be at least 100 characters long'),
+      })
+    ),
     onSubmit: (values) => {
       console.info('Submitted', values);
     },
   });
-
-  console.log(formik);
 
   return (
     <Segment title="New Idea">

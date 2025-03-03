@@ -1,20 +1,19 @@
-@import '../../styles/variables';
-@import '../../styles/mixins';
+@use '../../styles/mixins' as m;
 
 .segment {
   h1.title {
-    @include h1;
+    @include m.h1;
   }
 
   h2.title {
-    @include h2;
+    @include m.h2;
   }
 
   .description {
     font-size: 18px;
     margin-top: 5px;
   }
-  
+
   .content {
     margin-top: 12px;
   }
