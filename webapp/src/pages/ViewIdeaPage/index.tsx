@@ -9,7 +9,9 @@ import { Segment } from '../../components/Segment';
 export const ViewIdeaPage = () => {
   const { ideaNick } = useParams() as ViewIdeaRouteParams;
 
-  const { data, error, isLoading, isFetching, isError } = trpc.getIdea.useQuery({ ideaNick });
+  const { data, error, isLoading, isFetching, isError } = trpc.getIdea.useQuery(
+    { ideaNick }
+  );
 
   if (isLoading || isFetching) {
     return <span>Loading...</span>;
@@ -27,7 +29,10 @@ export const ViewIdeaPage = () => {
 
   return (
     <Segment title={data.idea.name} description={data.idea.description}>
-      <div className={css.text} dangerouslySetInnerHTML={{ __html: cleanHTML }} />
+      <div
+        className={css.text}
+        dangerouslySetInnerHTML={{ __html: cleanHTML }}
+      />
     </Segment>
   );
 };
